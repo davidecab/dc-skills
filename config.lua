@@ -1,9 +1,8 @@
 Config = Config or {}
 
-Config.Metadata = { -- aggiungere una nuova skill anche a qb-core/server/player.lua
-    {name = 'Minatore', skill = 'mining', icon = 'mound'},
-    {name = 'Tecnico', skill = 'technician', icon = 'terminal'},
-    {name = 'Petroliere', skill = 'oil', icon = 'droplet'},
+Config.Metadata = { -- skills to add to the Player's metadata table. You don't need to add them to qb-core/server/player.lua
+    {name = 'NewSkill', skill = 'newskill', icon = 'plus'},
+    -- {name = 'Technician', skill = 'technician', icon = 'terminal'},
 }
 
 Config.Levels = {
