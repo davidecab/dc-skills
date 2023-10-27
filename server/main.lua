@@ -1,6 +1,6 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
-lib.addCommand('info', { help = 'Apri informazioni personaggio', restricted = false }, function(source, args, raw)
+lib.addCommand('info', { help = 'Open skills info', restricted = false }, function(source, args, raw)
     local Player = QBCore.Functions.GetPlayer(source)
 
     local metadata = {}
@@ -12,11 +12,11 @@ lib.addCommand('info', { help = 'Apri informazioni personaggio', restricted = fa
         }
     end
 
-    TriggerClientEvent('u-skills:client:openMenu', source, metadata)
+    TriggerClientEvent('dc-skills:client:openMenu', source, metadata)
 end)
 
 lib.addCommand('addskill', {
-    help = 'Aggiunge exp ad una Skill',
+    help = 'Adds exp to a Skill',
     params = {
         {
             name = 'target',
@@ -26,12 +26,12 @@ lib.addCommand('addskill', {
         {
             name = 'skill',
             type = 'string',
-            help = 'Nome della Skill',
+            help = 'Skill name',
         },
         {
             name = 'exp',
             type = 'number',
-            help = 'Quantità di exp da aggiungere, lascia in bianco per aggiungere 1',
+            help = 'Amount of exp to add, leave blank to add 1',
             optional = true,
         },
     },
@@ -52,18 +52,18 @@ lib.addCommand('addskill', {
     if args.skill then
         if doesSkillExists then
             Player.Functions.SetMetaData(args.skill, (Player.Functions.GetMetaData(args.skill) or 0) + args.exp)
-            TriggerClientEvent('QBCore:Notify', source, 'Aggiunti ' .. args.exp .. ' punti exp alla skill "' .. args.skill .. '" per il player con ID:' .. args.target, 'success', 7000)
-            TriggerClientEvent('QBCore:Notify', args.target, 'Ricevuti ' .. args.exp .. ' punti exp per la skill "' .. args.skill .. '"', 'success', 7000)
+            TriggerClientEvent('QBCore:Notify', source, 'Added ' .. args.exp .. ' exp points to the skill "' .. args.skill .. '" for the player with ID:' .. args.target, 'success', 7000)
+            TriggerClientEvent('QBCore:Notify', args.target, 'Received ' .. args.exp .. ' exp points for the skill "' .. args.skill .. '"', 'success', 7000)
         else
-            TriggerClientEvent('QBCore:Notify', source, 'Questa skill non esiste', 'error')
+            TriggerClientEvent('QBCore:Notify', source, 'Skill does not exist', 'error')
         end
     else
-        TriggerClientEvent('QBCore:Notify', source, 'Skill non specificata', 'error')
+        TriggerClientEvent('QBCore:Notify', source, 'Skill not specified', 'error')
     end
 end)
 
 lib.addCommand('setskill', {
-    help = 'Imposta exp di una Skill',
+    help = 'Set skill exp points',
     params = {
         {
             name = 'target',
@@ -73,12 +73,12 @@ lib.addCommand('setskill', {
         {
             name = 'skill',
             type = 'string',
-            help = 'Nome della Skill',
+            help = 'Skill name',
         },
         {
             name = 'exp',
             type = 'number',
-            help = 'Quantità di exp da impostare',
+            help = 'Amount of exp to set',
         },
     },
 }, function(source, args, raw)
