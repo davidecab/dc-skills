@@ -4,22 +4,22 @@ local function CopyToClipboard(cid)
     SendNUIMessage({
         string = cid
     })
-    QBCore.Functions.Notify('ID Copiato', "success")
+    QBCore.Functions.Notify('ID copied on the Clipboard', "success")
 end
 
-RegisterNetEvent('u-skills:client:copyToClipboard', function(dataType)
+RegisterNetEvent('dc-skills:client:copyToClipboard', function(dataType)
     CopyToClipboard(dataType)
 end)
 
-RegisterNetEvent('u-skills:client:openMenu', function(metadata)
+RegisterNetEvent('dc-skills:client:openMenu', function(metadata)
     local opzioni = {}
     pData = QBCore.Functions.GetPlayerData()
 
     opzioni[#opzioni + 1] = {
-        title = 'ID Cittadino: ' .. pData.citizenid,
+        title = 'Citizen ID: ' .. pData.citizenid,
         icon = 'circle-info',
         metadata = {
-            {label = 'Click', value = 'Copia ID'}
+            {label = 'Click', value = 'Copy ID'}
         },
         onSelect = function()
             CopyToClipboard(pData.citizenid)
@@ -27,7 +27,7 @@ RegisterNetEvent('u-skills:client:openMenu', function(metadata)
     }
 
     opzioni[#opzioni + 1] = {
-        title = 'Albero Abilità',
+        title = 'Skill tree',
         icon = 'arrow-down',
         disabled = true
     }
@@ -61,7 +61,7 @@ RegisterNetEvent('u-skills:client:openMenu', function(metadata)
 
         opzioni[#opzioni + 1] = {
             title = v.name,
-            description = 'Il tuo livello: ' .. livello .. ' [EXP: ' .. metaExp .. '/' .. remaining .. ']',
+            description = 'Your level: ' .. livello .. ' [EXP: ' .. metaExp .. '/' .. remaining .. ']',
             icon = v.icon,
             progress = percentage,
             colorScheme = '#38D9A9'
